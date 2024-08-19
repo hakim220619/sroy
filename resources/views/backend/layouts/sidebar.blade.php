@@ -1,6 +1,6 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
-      <div class="m-header">
+      <div class="m-header" style="background: #157035">
         <a href="../dashboard/index.html" class="b-brand text-primary">
           <!-- ========   Change your logo from here   ============ -->
           <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg">
@@ -10,7 +10,7 @@
   
       <div class="card pc-user-card">
         <div class="card-body">
-          <div class="nav-user-image">
+          <div class="nav-user-image" style="background: #157035">
             <a data-bs-toggle="collapse" href="#navuserlink">
               <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar rounded-circle">
             </a>
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="navbar-content">
-        <ul class="pc-navbar">
+        <ul class="pc-navbar" style="background: #157035;">
           <li class="pc-item pc-caption">
             <label>Navigation</label>
           </li>
