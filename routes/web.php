@@ -4,6 +4,7 @@ use App\Http\Controllers\Add_csr;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +44,13 @@ Route::middleware(['auth'])->group(function () {
         $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/districts/{$regencyId}.json");
         return response($response->body(), $response->status());
     });
+    Route::get('/menu', [MenuController::class, 'menu'])->name('menu.menu');
+    Route::get('/menuManagement', [MenuController::class, 'menuManagement'])->name('menu.menuManagement');
+    // routes/web.php
+    Route::get('/menus/dataMenuManagement', [MenuController::class, 'getDataMenuManagement'])->name('menus.getDataMenuManagement');
+    Route::get('/menus/data', [MenuController::class, 'getMenuData'])->name('menus.data');
+    Route::post('/menus/store', [MenuController::class, 'store'])->name('menus.store');
+    Route::put('/menus/update/{id}', [MenuController::class, 'update'])->name('menus.update');
+    Route::delete('menus/{id}', [MenuController::class, 'destroy'])->name('menus.destroy');
+
 });
