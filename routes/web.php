@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,13 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/menu', [MenuController::class, 'menu'])->name('menu.menu');
+    Route::get('/menuManagement', [MenuController::class, 'menuManagement'])->name('menu.menuManagement');
+    // routes/web.php
+    Route::get('/menus/dataMenuManagement', [MenuController::class, 'getDataMenuManagement'])->name('menus.getDataMenuManagement');
+    Route::get('/menus/data', [MenuController::class, 'getMenuData'])->name('menus.data');
+    Route::post('/menus/store', [MenuController::class, 'store'])->name('menus.store');
+    Route::put('/menus/update/{id}', [MenuController::class, 'update'])->name('menus.update');
+    Route::delete('menus/{id}', [MenuController::class, 'destroy'])->name('menus.destroy');
+
 });
