@@ -19,6 +19,9 @@
 
     <!-- [Favicon] icon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
+    <!-- map-vector css -->
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jsvectormap.min.css') }}">
+    <link href="{{ asset('assets/css/plugins/jqvmap.css') }}" media="screen" rel="stylesheet" type="text/css"/>
     <!-- [Google Font : Public Sans] icon -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -32,6 +35,7 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/material.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}">
+    
 </head>
 
 <body data-pc-preset="preset-1" data-pc-sidebar-theme="dark" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
@@ -79,6 +83,7 @@
     @include('backend.layouts.footer')
 
     <!-- Tambahkan JS di sini -->
+   
     <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
@@ -90,6 +95,36 @@
     <script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/plugins/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/world.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/world-merc.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/canada.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/iraq.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/italy.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/russia.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/spain.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/us-aea-en.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/us-lcc-en.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/us-merc-en.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/us-mill-en.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/map-vector.js') }}"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/pages/jquery.vmap.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/jquery.vmap.indonesia.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+          jQuery('#vmap').vectorMap({
+            map: 'indonesia_id',
+            enableZoom: true,
+            showTooltip: true,
+            selectedColor: null,
+            onRegionClick: function(event, code, region){
+              event.preventDefault();
+            }
+          });
+        });
+      </script>
 
 
 

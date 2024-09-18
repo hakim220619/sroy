@@ -23,6 +23,8 @@ AND mm.role_id = '" .
 
     .pc-item .add-csr-btn {
         display: flex;
+        align-content: center;
+        text-align: center;
         align-items: center;
         justify-content: space-between;
         background-color: #f1f1f1;
@@ -39,6 +41,7 @@ AND mm.role_id = '" .
         /* Make text a bit bolder */
         width: fit-content;
         /* Adjust width to content */
+        margin: 0 auto;
     }
 
     .pc-item .add-csr-btn .pc-mtext {
@@ -120,7 +123,7 @@ AND mm.role_id = '" .
             <ul class="pc-navbar" style="background: #157035;">
                 <div class="center-container">
                     <li class="pc-item">
-                        <a href="../pages/settings.html" class="pc-link add-csr-btn">
+                        <a href="{{ route('add_csr') }}" class="pc-link add-csr-btn text-center">
                             <span class="pc-mtext">Add CSR</span>
                             <span class="pc-micon">
                                 <i class="ph-duotone ph-plus"></i>
