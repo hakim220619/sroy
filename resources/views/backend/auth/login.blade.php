@@ -88,7 +88,7 @@
                     <div class="d-flex justify-content-between align-items-end">
                         <div>
                             <h6 class="f-w-500 mb-0">Don't have an Account?</h6>
-                            <a href="register-v2.html" class="link-primary">Create Account</a>
+                            <a href="{{route('register')}}" class="link-primary">Create Account</a>
                         </div>
                         <a href="../index.html"><img src="../assets/images/logo-dark-sm.svg" alt="img"></a>
                     </div>

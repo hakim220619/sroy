@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Add_csr;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +29,28 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/add_csr', [Add_csr::class, 'index'])->name('add_csr');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
+    Route::get('/proxy/provinces', function () {
+        $response = Http::get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+        return response($response->body(), $response->status());
+    });    
+    Route::get('/proxy/regencies/{provinceId}', function ($provinceId) {
+        $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/{$provinceId}.json");
+        return response($response->body(), $response->status());
+    });
+    Route::get('/proxy/districts/{regencyId}', function ($regencyId) {
+        $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/districts/{$regencyId}.json");
+        return response($response->body(), $response->status());
+    });
+    Route::get('/menu', [MenuController::class, 'menu'])->name('menu.menu');
+
+
+    // routes/web.php
+    //Menu Management
+    Route::get('/menuManagement', [MenuController::class, 'menuManagement'])->name('menu.menuManagement');
     // routes/web.php
     //Menu Management
     Route::get('/menuManagement', [MenuController::class, 'menuManagement'])->name('menu.menuManagement');

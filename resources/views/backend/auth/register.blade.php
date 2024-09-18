@@ -78,7 +78,7 @@
             <div class="d-flex justify-content-between align-items-end">
               <div>
                 <h6 class="f-w-500 mb-0">Already have an Account?</h6>
-                <a href="login-v2.html" class="link-primary">Log in</a>
+                <a href="{{route('login')}}" class="link-primary">Log in</a>
               </div>
               <a href="../index.html"><img src="../assets/images/logo-dark-sm.svg" alt="img"></a>
             </div>
