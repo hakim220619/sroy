@@ -33,9 +33,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Access</th>
-                                <th>Menu Name</th>
-                                <th>Menu Active</th>
+                                <th>Role Name</th>
+                                <th>Status</th>
                                 <th>Created</th>
                             </tr>
                         </thead>
@@ -135,7 +134,7 @@
                 var drow = $('#row-selected').DataTable({
                     processing: false,
                     serverSide: false,
-                    ajax: '{{ route('menus.getDataMenuManagement') }}',
+                    ajax: '{{ route('role.getDataRole') }}',
                     columns: [
                         { data: 'id', name: 'id' },
                         { data: 'role_name', name: 'role_name' },

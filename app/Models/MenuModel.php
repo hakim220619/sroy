@@ -41,8 +41,32 @@ class  MenuModel extends Model
     {
         return $this->hasMany(MenuModel::class, 'parent_id');
     }
-    public static function getDataMenuManagement() {
-        DB::table('menu_management');
+    public static function getDataMenuManagement()
+    {
+        return DB::select("SELECT mm.id, mm.role_id, mm.menu_id, mm.created_at, m.menu_name, m.is_active, r.role_name 
+FROM menu_management mm, menus m, role r 
+WHERE mm.menu_id=m.id 
+and mm.role_id=r.id");
+    }
+    public static function createMenuManagement($request)
+    {
+        // If the combination does not exist, insert the new record
+        DB::table('menu_management')->insert([
+            'role_id' => $request->role_id,
+            'menu_id' => $request->menu_id,
+            'created_at' => now()
+        ]);
+    }
+    public static function updateMenuManagement($request, $id)
+    {
+        DB::table('menu_management')->where('id', $id)->update([
+            'role_id' => $request->role_id,
+            'menu_id' => $request->menu_id,
+            'updated_at' => now()
+        ]);
+    }
+    public static function menuManagementDeleted($id)
+    {
+        DB::table('menu_management')->where('id', $id)->delete();
     }
 }
-
