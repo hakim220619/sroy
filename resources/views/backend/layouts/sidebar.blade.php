@@ -1,3 +1,14 @@
+@php
+    $menus = DB::select(
+        "SELECT m.menu_name, m.icon, m.route, m.parent_id, m.order, m.is_active 
+FROM menu_management mm, menus m, role r 
+WHERE mm.menu_id=m.id and mm.role_id=r.id 
+and m.is_active = 'ON' 
+AND mm.role_id = '" .
+            request()->user()->role_id .
+            "' order by m.order ASC",
+    );
+@endphp
 <style>
     /* Styling for the outer container to center the content */
     .center-container {
@@ -54,7 +65,13 @@
         background-color: #e0e0e0;
         /* Change background on hover */
     }
-    
+
+    .pc-item.active a {
+        background-color: #ffffff;
+        /* Warna latar untuk menu yang aktif */
+        color: #000;
+        /* Warna teks untuk menu aktif */
+    }
 </style>
 <nav class="pc-sidebar" style="background: #157035">
     <div class="navbar-wrapper">
@@ -111,36 +128,21 @@
                         </a>
                     </li>
                 </div>
-
-
-                <li class="pc-item pc-caption">
-                    <label>Navigation</label>
-                </li>
-                <li class="pc-item">
-                  <a href="../pages/dashboard.html" class="pc-link">
-                    <span class="pc-micon">
-                      <i class="ph-duotone ph-house"></i> <!-- Ikon dashboard -->
-                    </span>
-                    <span class="pc-mtext">Dashboard</span>
-                  </a>
-                </li>
-                <li class="pc-item">
-                  <a href="../pages/data-csr.html" class="pc-link">
-                    <span class="pc-micon">
-                      <i class="ph-duotone ph-folder"></i> <!-- Ikon folder untuk Data CSR -->
-                    </span>
-                    <span class="pc-mtext">Data CSR</span>
-                  </a>
-                </li>
-                <li class="pc-item">
-                  <a href="../pages/analisis-sroi.html" class="pc-link">
-                    <span class="pc-micon">
-                      <i class="ph-duotone ph-arrow-counter-clockwise"></i> <!-- Ikon analisis untuk SROI -->
-                    </span>
-                    <span class="pc-mtext">Analisis SROI</span>
-                  </a>
-                </li>
-                
+                @foreach ($menus as $key => $mm)
+                    @if ($key < 1)
+                        <li class="pc-item pc-caption">
+                            <label>Navigation</label>
+                        </li>
+                    @endif
+                    <li class="pc-item {{ Request::is(ltrim($mm->route, '/')) ? 'active' : '' }}">
+                        <a href="{{ $mm->route }}" class="pc-link">
+                            <span class="pc-micon">
+                                {!! $mm->icon !!}
+                            </span>
+                            <span class="pc-mtext">{{ $mm->menu_name }}</span>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
