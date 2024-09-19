@@ -57,13 +57,13 @@
                         <div class="form-group">
                             <label class="form-label">Priode Program:</label>
                             <div class="input-group search-form">
-                              <span>
+                             
                                   <input type="date" name="priode_program_dari" class="form-control" placeholder="Pilih Tanggal">   
-                              </span>
+                              
                               <span class="mx-3 my-3">s/d</span>
-                              <span>
+                           
                                   <input type="date" name="priode_program_sampai" class="form-control" placeholder="Pitih Tanggal">   
-                              </span>
+                              
                             </div>
                           </div>
                       </div>
@@ -71,13 +71,13 @@
                         <div class="form-group">
                             <label class="form-label">Jangka Waktu Manfaat:</label>
                             <div class="input-group search-form">
-                              <span>
+                          
                                   <input type="date" name="jangka_waktu_manfaat_dari" class="form-control" placeholder="Pilih Tanggal">   
-                              </span>
+                             
                               <span class="mx-3 my-3">s/d</span>
-                              <span>
+                            
                                   <input type="date" name="jangka_waktu_manfaat_sampai" class="form-control" placeholder="Pitih Tanggal">   
-                              </span>
+                              
                             </div>
                           </div>
                       </div>                      
