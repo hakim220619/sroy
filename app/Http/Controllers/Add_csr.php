@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProgramCSR;
+use App\Models\Stakeholder;
+use App\Models\ProgramCSRStakeholder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -32,4 +35,42 @@ class Add_csr extends Controller
 
         return view('content.add_csr.add_csr', $data);
    }
+   public function store(Request $request) {
+        // Validasi data
+        $request->validate([
+            'nama_program' => 'required',
+            'entitas' => 'required',
+            // Validasi lainnya
+        ]);
+
+        // Simpan program CSR ke database
+        $program = new ProgramCSR;
+        $program->nama_program = $request->nama_program;
+        $program->entitas = $request->entitas;
+        // Isi kolom lainnya...
+        $program->save();
+
+        // Loop untuk menyimpan data stakeholder
+        if ($request->stakeholders) {
+            foreach ($request->stakeholders as $stakeholderData) {
+                // Simpan stakeholder
+                $stakeholder = new Stakeholder;
+                $stakeholder->peran = $stakeholderData['peran'];
+                $stakeholder->output = $stakeholderData['output'];
+                $stakeholder->outcome = $stakeholderData['outcome'];
+                $stakeholder->dana = $stakeholderData['dana'];
+                $stakeholder->durasi = $stakeholderData['durasi'];
+                $stakeholder->barang = $stakeholderData['barang'];
+                $stakeholder->save();
+
+                // Simpan hubungan ke tabel pivot
+                $pivot = new ProgramCSRStakeholder;
+                $pivot->id_program_csr = $program->id;
+                $pivot->id_stakeholder = $stakeholder->id;
+                $pivot->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil disimpan.');
+    }
 }
