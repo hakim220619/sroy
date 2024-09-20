@@ -2,10 +2,10 @@
 
 @extends('backend.layouts.app')
 
-@section('title', 'Data CSR')
+@section('title', 'Analisis SROI')
 @section('page-header-icon', 'ph-duotone ph-house')
 @section('page-header-one', 'Home')
-@section('page-header', 'Data CSR')
+@section('page-header', 'Analisis SROI')
 
 @section('content')
     <!-- Konten Utama Halaman -->
@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Data Program CSR</h5>
+                    <h5>Analisis SROI Program CSR</h5>
                   </div>
                   <div class="card-body">
                     <div class="dt-responsive">
@@ -37,7 +37,7 @@
                             <td>{{ date('Y', strtotime($dc->priode_program_dari)) }}</td>
                             <td>{{ $dc->dana }}</td>
                             <td>
-                                <button type="button" class="btn btn-info btn-sm">Lihat Data</button>
+                                <button type="button" class="btn btn-info btn-sm">Analisis</button>
                             </td>
                           </tr>
                           @endforeach

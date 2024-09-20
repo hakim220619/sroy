@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Add_csr;
+use App\Http\Controllers\Analisis_sroi;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Data_csr;
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/add_csr', [Add_csr::class, 'index'])->name('add_csr');
     Route::post('/csr/store', [Add_csr::class, 'store'])->name('csr.store');
     Route::get('/data-csr', [Data_csr::class, 'index'])->name('data-csr');
+    Route::get('/analisis-sroi', [Analisis_sroi::class, 'index'])->name('analisis-sroi');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
