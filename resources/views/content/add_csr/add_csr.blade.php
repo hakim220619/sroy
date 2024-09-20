@@ -139,11 +139,6 @@
                                     <tr>
                                       <th>Nama Stakeholder</th>
                                       <th>Peran</th>
-                                      <th>Output</th>
-                                      <th>Outcome</th>
-                                      <th>Dana</th>
-                                      <th>Durasi</th>
-                                      <th>Barang</th>
                                       <th>Aksi</th>
                                     </tr>
                                   </thead>
@@ -235,6 +230,7 @@
     </div>
 <!-- jQuery CDN (jika belum ditambahkan) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
@@ -318,12 +314,12 @@
         // Tambahkan stakeholder ke tabel
         let newRow = `<tr>
             <td><input type="hidden" name="stakeholders[][name]" value="${name}">${name}</td>
-            <td><input type="hidden" name="stakeholders[][role]" value="${role}">${role}</td>
-            <td><input type="hidden" name="stakeholders[][output]" value="${output}">${output}</td>
-            <td><input type="hidden" name="stakeholders[][outcome]" value="${outcome}">${outcome}</td>
-            <td><input type="hidden" name="stakeholders[][dana]" value="${dana}">${dana}</td>
-            <td><input type="hidden" name="stakeholders[][durasi]" value="${durasi} ${satuan_waktu}">${durasi} ${satuan_waktu}</td>
-            <td><input type="hidden" name="stakeholders[][barang]" value="${barang}">${barang}</td>
+            <td><input type="hidden" name="stakeholders[][peran]" value="${role}">${role}</td>
+            <span><input type="hidden" name="stakeholders[][output]" value="${output}"></span>
+            <span><input type="hidden" name="stakeholders[][outcome]" value="${outcome}"></span>
+            <span><input type="hidden" name="stakeholders[][dana]" value="${dana}"></span>
+            <span><input type="hidden" name="stakeholders[][durasi]" value="${durasi} ${satuan_waktu}"></span>
+            <span><input type="hidden" name="stakeholders[][barang]" value="${barang}"></span>
             <td><button type="button" class="btn btn-danger btn-sm delete-row">Hapus</button></td>
         </tr>`;
 
@@ -338,5 +334,15 @@
         });
     });
 });
+</script>
+<script>
+  @if (session('success'))
+      Swal.fire({
+          title: 'Success!',
+          text: "{{ session('success') }}",
+          icon: 'success',
+          confirmButtonText: 'OK'
+      });
+  @endif
 </script>
 @endsection

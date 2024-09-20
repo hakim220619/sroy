@@ -47,14 +47,47 @@ class Add_csr extends Controller
         $program = new ProgramCSR;
         $program->nama_program = $request->nama_program;
         $program->entitas = $request->entitas;
+        $program->deskripsi_program = $request->deskripsi_program;
+        $program->tujuan_program = $request->tujuan_program;
+        $program->priode_program_dari = $request->priode_program_dari;
+        $program->priode_program_sampai = $request->priode_program_sampai;
+        $program->jangka_waktu_manfaat_dari = $request->jangka_waktu_manfaat_dari;
+        $program->jangka_waktu_manfaat_sampai = $request->jangka_waktu_manfaat_sampai;
+        $program->alamat_pelaksanaan = $request->alamat_pelaksanaan;
+        $program->provinsi = $request->provinsi;
+        $program->kabupaten = $request->kabupaten;
+        $program->kecamatan = $request->kecamatan;
         // Isi kolom lainnya...
-        $program->save();
-
+        $program->save($request->stakeholders);
         // Loop untuk menyimpan data stakeholder
+
         if ($request->stakeholders) {
-            foreach ($request->stakeholders as $stakeholderData) {
+            $data = $request->stakeholders;
+        
+            // Tentukan ukuran kelompok data (jumlah field per stakeholder)
+            $chunkSize = 7;
+        
+            // Array untuk menyimpan stakeholder yang sudah terstruktur
+            $groupedData = [];
+        
+            // Menggabungkan data berdasarkan setiap stakeholder
+            for ($i = 0; $i < count($data); $i += $chunkSize) {
+                
+                $groupedData[] = [
+                    'name' => $data[$i]['name'] ?? null,
+                    'peran' => $data[$i + 1]['peran'] ?? null,
+                    'output' => $data[$i + 2]['output'] ?? null,
+                    'outcome' => $data[$i + 3]['outcome'] ?? null,
+                    'dana' => $data[$i + 4]['dana'] ?? null,
+                    'durasi' => $data[$i + 5]['durasi'] ?? null,
+                    'barang' => $data[$i + 6]['barang'] ?? null,
+                ];
+            }
+       
+            foreach ($groupedData as $stakeholderData) {
                 // Simpan stakeholder
                 $stakeholder = new Stakeholder;
+                $stakeholder->nama_stakeholder = $stakeholderData['name'];
                 $stakeholder->peran = $stakeholderData['peran'];
                 $stakeholder->output = $stakeholderData['output'];
                 $stakeholder->outcome = $stakeholderData['outcome'];
@@ -62,7 +95,7 @@ class Add_csr extends Controller
                 $stakeholder->durasi = $stakeholderData['durasi'];
                 $stakeholder->barang = $stakeholderData['barang'];
                 $stakeholder->save();
-
+        
                 // Simpan hubungan ke tabel pivot
                 $pivot = new ProgramCSRStakeholder;
                 $pivot->id_program_csr = $program->id;

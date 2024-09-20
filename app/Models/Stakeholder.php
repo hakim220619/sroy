@@ -14,6 +14,7 @@ class Stakeholder extends Model
 
     // Field yang dapat diisi secara massal (mass assignable)
     protected $fillable = [
+        'nama_stakeholder',
         'peran',
         'output',
         'outcome',
