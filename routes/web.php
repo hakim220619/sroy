@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/csr/store', [Add_csr::class, 'store'])->name('csr.store');
     Route::get('/data-csr', [Data_csr::class, 'index'])->name('data-csr');
     Route::get('/analisis-sroi', [Analisis_sroi::class, 'index'])->name('analisis-sroi');
+    Route::get('/analisis-sroi/{id}', [Analisis_sroi::class, 'detail_analisis'])->name('detail-analisis');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 

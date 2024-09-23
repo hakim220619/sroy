@@ -34,8 +34,8 @@
                             <td>{{ $index+1 }}</td>
                             <td>{{ $dc->nama_program }}</td>
                             <td>{{ $dc->entitas }}</td>
-                            <td>{{ date('Y', strtotime($dc->priode_program_dari)) }}</td>
-                            <td>{{ $dc->dana }}</td>
+                            <td>{{ $dc->tahun }}</td>
+                            <td>{{ $dc->anggaran }}</td>
                             <td>
                                 <button type="button" class="btn btn-info btn-sm">Lihat Data</button>
                             </td>

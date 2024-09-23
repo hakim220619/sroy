@@ -16,6 +16,8 @@ class ProgramCSR extends Model
     protected $fillable = [
         'nama_program',
         'entitas',
+        'anggaran',
+        'tahun',
         'deskripsi_program',
         'tujuan_program',
         'priode_program_dari',

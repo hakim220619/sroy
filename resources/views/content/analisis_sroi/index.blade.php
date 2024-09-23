@@ -34,10 +34,10 @@
                             <td>{{ $index+1 }}</td>
                             <td>{{ $dc->nama_program }}</td>
                             <td>{{ $dc->entitas }}</td>
-                            <td>{{ date('Y', strtotime($dc->priode_program_dari)) }}</td>
-                            <td>{{ $dc->dana }}</td>
+                            <td>{{ $dc->tahun }}</td>
+                            <td>{{ $dc->anggaran }}</td>
                             <td>
-                                <button type="button" class="btn btn-info btn-sm">Analisis</button>
+                              <a href="{{ route('detail-analisis', $dc->id_program_csr) }}" class="btn btn-info btn-sm">Analisis</a>
                             </td>
                           </tr>
                           @endforeach

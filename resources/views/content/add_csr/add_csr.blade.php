@@ -29,14 +29,27 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-label">Nama Program:</label>
-                                <input type="text" name="nama_program" id="nama_program" class="form-control" placeholder="Nama Program">
+                                <input type="text" name="nama_program" id="nama_program" class="form-control" placeholder="Nama Program" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-label">Entitas:</label>
-                                <input type="text" class="form-control" name="entitas" id="entitas" placeholder="Entitas">
+                                <input type="text" class="form-control" name="entitas" id="entitas" placeholder="Entitas" required>
                             </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-label">Anggaran:</label>
+                                <input type="number" class="form-control" name="anggaran" id="anggaran" placeholder="anggaran" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label class="form-label">Tahun:</label>
+                            <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Tahun" required>
+                            <span id="error-message" style="color:red; display:none;">Tahun wajib diisi.</span>
+                        </div>
                         </div>
                     </div>
                     <div class="row">
@@ -44,7 +57,7 @@
                         <div class="form-group">
                           <label class="form-label">Deskripsi Program:</label>
                           <div class="input-group search-form">
-                            <textarea name="deskripsi_program" class="form-control" id="deskripsi_program" cols="30" rows="10" placeholder="Deskripsi CSR"></textarea>
+                            <textarea name="deskripsi_program" class="form-control" id="deskripsi_program" cols="30" rows="10" placeholder="Deskripsi CSR" required></textarea>
                           </div>
                         </div>
                       </div>
@@ -52,7 +65,7 @@
                         <div class="form-group">
                           <label class="form-label">Tujuan Program:</label>
                           <div class="input-group search-form">
-                            <textarea name="tujuan_program" class="form-control" id="tujuan_program" cols="30" rows="10" placeholder="Tujuan CSR"></textarea>
+                            <textarea name="tujuan_program" class="form-control" id="tujuan_program" cols="30" rows="10" placeholder="Tujuan CSR" required></textarea>
                           </div>
                         </div>
                       </div>                      
@@ -63,11 +76,11 @@
                             <label class="form-label">Priode Program:</label>
                             <div class="input-group search-form">
                              
-                                  <input type="date" name="priode_program_dari" id="priode_program_dari" class="form-control" placeholder="Pilih Tanggal">   
+                                  <input type="date" name="priode_program_dari" id="priode_program_dari" class="form-control" placeholder="Pilih Tanggal" required>   
                               
                               <span class="mx-3 my-3">s/d</span>
                            
-                                  <input type="date" name="priode_program_sampai" id="priode_program_sampai" class="form-control" placeholder="Pitih Tanggal">   
+                                  <input type="date" name="priode_program_sampai" id="priode_program_sampai" class="form-control" placeholder="Pitih Tanggal" required>   
                               
                             </div>
                           </div>
@@ -77,11 +90,11 @@
                             <label class="form-label">Jangka Waktu Manfaat:</label>
                             <div class="input-group search-form">
                           
-                                  <input type="date" name="jangka_waktu_manfaat_dari" id="jangka_waktu_manfaat_dari" class="form-control" placeholder="Pilih Tanggal">   
+                                  <input type="date" name="jangka_waktu_manfaat_dari" id="jangka_waktu_manfaat_dari" class="form-control" placeholder="Pilih Tanggal" required>   
                              
                               <span class="mx-3 my-3">s/d</span>
                             
-                                  <input type="date" name="jangka_waktu_manfaat_sampai" id="jangka_waktu_manfaat_sampai" class="form-control" placeholder="Pitih Tanggal">   
+                                  <input type="date" name="jangka_waktu_manfaat_sampai" id="jangka_waktu_manfaat_sampai" class="form-control" placeholder="Pitih Tanggal" required>   
                               
                             </div>
                           </div>
@@ -95,13 +108,13 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-label">Alamat Pelaksanaan Program:</label>
-                                <input type="text" class="form-control" name="alamat_pelaksanaan" id="alamat_pelaksanaan" placeholder="Alamat Program">
+                                <input type="text" class="form-control" name="alamat_pelaksanaan" id="alamat_pelaksanaan" placeholder="Alamat Program" required>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-label">Provinsi:</label>
-                                <select name="provinsi" id="provinsi" class="form-control">
+                                <select name="provinsi" id="provinsi" class="form-control" required>
                                     <option value="">Pilih provinsi</option>
                                     @foreach ($provinces as $p)
                                     <option value="{{ $p['name'] }}" data-id="{{ $p['id'] }}">{{ $p['name'] }}</option>
@@ -113,7 +126,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-label">Kabupaten/Kota:</label>
-                                <select name="kabupaten" id="kabupaten" class="form-control">
+                                <select name="kabupaten" id="kabupaten" class="form-control" required>
                                     <option value="">Pilih kabupaten/kota</option>
                                 </select>
                             </div>
@@ -121,7 +134,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-label">Kecamatan:</label>
-                                <select name="kecamatan" id="kecamatan" class="form-control">
+                                <select name="kecamatan" id="kecamatan" class="form-control" required>
                                     <option value="">Pilih kecamatan</option>
                                 </select>
                             </div>
@@ -174,11 +187,11 @@
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress">Nama Stakeholder</label>
-                                                      <input type="text" class="form-control" id="stakeholder-name" placeholder="Nama Stakeholder">
+                                                      <input type="text" class="form-control" id="stakeholder-name" placeholder="Nama Stakeholder" required>
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress2">Peran</label>
-                                                      <input type="text" class="form-control" id="stakeholder-role" placeholder="Peran">
+                                                      <input type="text" class="form-control" id="stakeholder-role" placeholder="Peran" required>
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress2">Output</label>
@@ -186,20 +199,20 @@
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress2">Outcome</label>
-                                                      <textarea name="output"  class="form-control" id="stakeholder-outcome" cols="30" rows="10"></textarea>
+                                                      <textarea name="output"  class="form-control" id="stakeholder-outcome" cols="30" rows="10" required></textarea>
                                                     </div>
                                                     <div class="row">
                                                       <div class="form-group col-md-3">
                                                         <label class="form-label" for="inputCity">Dana</label>
-                                                        <input type="text" class="form-control" id="stakeholder-dana" >
+                                                        <input type="text" class="form-control" id="stakeholder-dana"  required>
                                                       </div>
                                                       <div class="form-group col-md-2">
                                                         <label class="form-label" for="inputZip">Durasi</label>
-                                                        <input type="text" class="form-control" id="stakeholder-durasi">
+                                                        <input type="text" class="form-control" id="stakeholder-durasi" required>
                                                       </div>
                                                       <div class="form-group col-md-3 mt-2">
                                                         <label class="form-label" for="inputZip"></label>
-                                                        <select id="stakeholder-satuan-waktu" class="form-select">
+                                                        <select id="stakeholder-satuan-waktu" class="form-select" required>
                                                           <option value="" selected>select</option>
                                                           <option>Bulan</option>
                                                           <option>Minggu</option>
@@ -208,7 +221,7 @@
                                                       </div>
                                                       <div class="form-group col-md-4">
                                                         <label class="form-label" for="inputCity">Barang</label>
-                                                        <input type="text" class="form-control" id="stakeholder-barang" placeholder="Nama Barang">
+                                                        <input type="text" class="form-control" id="stakeholder-barang" placeholder="Nama Barang" required>
                                                       </div>                                                      
                                                     </div>
                                                 </div>
@@ -345,4 +358,11 @@
       });
   @endif
 </script>
+<script>
+  document.getElementById("tahun").addEventListener("invalid", function () {
+      var errorMessage = document.getElementById("error-message");
+      errorMessage.style.display = "block";
+      errorMessage.style.position = "fixed"; // agar tetap terlihat
+  });
+  </script>
 @endsection

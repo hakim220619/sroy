@@ -47,6 +47,8 @@ class Add_csr extends Controller
         $program = new ProgramCSR;
         $program->nama_program = $request->nama_program;
         $program->entitas = $request->entitas;
+        $program->anggaran = $request->anggaran;
+        $program->tahun = $request->tahun;
         $program->deskripsi_program = $request->deskripsi_program;
         $program->tujuan_program = $request->tujuan_program;
         $program->priode_program_dari = $request->priode_program_dari;
