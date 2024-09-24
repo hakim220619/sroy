@@ -57,7 +57,7 @@
                     <h5>Basic Map With Markers</h5>
                 </div>
                 <div class="card-body">
-                  <div id="world-map-markers" class="set-map" style="height:600px;"></div>
+                  <div id="world-map-markers"  style="height:600px;"></div>
                 </div>
             </div>
         </div>
