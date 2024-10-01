@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-  <title>Login | Flat Able Dashboard Template</title>
+  <title>Login | Manajemen SROI</title>
   <!-- [Meta] -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -13,7 +13,7 @@
   <meta name="author" content="phoenixcoded">
 
   <!-- [Favicon] icon -->
-  <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font : Public Sans] icon -->
+  <link rel="icon" href="{{ asset('assets/img/logo-lpp.png') }}" type="image/x-icon"> <!-- [Google Font : Public Sans] icon -->
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- [Tabler Icons] https://tablericons.com -->

@@ -23,8 +23,9 @@
                             <th>No</th>
                             <th>Nama Program</th>
                             <th>Entitas</th>
-                            <th>Tahun</th>
+                            <th>Region</th>
                             <th>Anggaran(Rp)</th>
+                            <th>Priode</th>
                             <th>Aksi</th>
                           </tr>
                         </thead>
@@ -34,8 +35,9 @@
                             <td>{{ $index+1 }}</td>
                             <td>{{ $dc->nama_program }}</td>
                             <td>{{ $dc->entitas }}</td>
-                            <td>{{ $dc->tahun }}</td>
+                            <td>{{ $dc->region }}</td>
                             <td>{{ $dc->anggaran }}</td>
+                            <td>{{ date('d-M-Y', strtotime($dc->priode_program_dari)) .' s/d '. date('d-M-Y', strtotime($dc->priode_program_sampai)) }}</td>
                             <td>
                                 <button type="button" class="btn btn-info btn-sm">Lihat Data</button>
                             </td>
