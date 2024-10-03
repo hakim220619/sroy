@@ -293,32 +293,32 @@
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress">Nama Stakeholder</label>
-                                                      <input type="text" class="form-control" id="stakeholder-name" placeholder="Nama Stakeholder" required>
+                                                      <input type="text" class="form-control" id="stakeholder-name" placeholder="Nama Stakeholder" >
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress2">Peran</label>
-                                                      <input type="text" class="form-control" id="stakeholder-role" placeholder="Peran" required>
+                                                      <input type="text" class="form-control" id="stakeholder-role" placeholder="Peran" >
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress2">Output</label>
-                                                      <textarea name="output"  class="form-control" id="stakeholder-output" cols="30" rows="10"></textarea>
+                                                      <textarea class="form-control" id="stakeholder-output" cols="30" rows="10"></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                       <label class="form-label" for="inputAddress2">Outcome</label>
-                                                      <textarea name="output"  class="form-control" id="stakeholder-outcome" cols="30" rows="10" required></textarea>
+                                                      <textarea class="form-control" id="stakeholder-outcome" cols="30" rows="10" ></textarea>
                                                     </div>
                                                     <div class="row">
                                                       <div class="form-group col-md-3">
                                                         <label class="form-label" for="inputCity">Dana</label>
-                                                        <input type="text" class="form-control" id="stakeholder-dana"  required>
+                                                        <input type="text" class="form-control" id="stakeholder-dana"  >
                                                       </div>
                                                       <div class="form-group col-md-2">
                                                         <label class="form-label" for="inputZip">Durasi</label>
-                                                        <input type="text" class="form-control" id="stakeholder-durasi" required>
+                                                        <input type="text" class="form-control" id="stakeholder-durasi" >
                                                       </div>
                                                       <div class="form-group col-md-3 mt-2">
                                                         <label class="form-label" for="inputZip"></label>
-                                                        <select id="stakeholder-satuan-waktu" class="form-select" required>
+                                                        <select id="stakeholder-satuan-waktu" class="form-select" >
                                                           <option value="" selected>select</option>
                                                           <option>Tahun</option>
                                                           <option>Bulan</option>
@@ -328,7 +328,7 @@
                                                       </div>
                                                       <div class="form-group col-md-4">
                                                         <label class="form-label" for="inputCity">Barang</label>
-                                                        <input type="text" class="form-control" id="stakeholder-barang" placeholder="Nama Barang" required>
+                                                        <input type="text" class="form-control" id="stakeholder-barang" placeholder="Nama Barang" >
                                                       </div>                                                      
                                                     </div>
                                                 </div>
