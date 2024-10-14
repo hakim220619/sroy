@@ -27,6 +27,10 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login_action'])->name('login.action');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/registerAction', [AuthController::class, 'registerAction'])->name('registerAction');
+
+Route::get('/login/google',  [AuthController::class, 'redirectToGoogle'])->name('login.redirectToGoogle');
+Route::get('/login/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('login.handleGoogleCallback');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -55,10 +59,6 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/menu', [MenuController::class, 'menu'])->name('menu.menu');
 
-
-    // routes/web.php
-    //Menu Management
-    Route::get('/menuManagement', [MenuController::class, 'menuManagement'])->name('menu.menuManagement');
     // routes/web.php
     //Menu Management
     Route::get('/menuManagement', [MenuController::class, 'menuManagement'])->name('menu.menuManagement');
@@ -69,6 +69,12 @@ Route::middleware(['auth'])->group(function () {
     //Role
     Route::get('/role', [RoleController::class, 'index'])->name('role');
     Route::get('/roles/getData', [RoleController::class, 'getAllRoles'])->name('roles.getAllRoles');
+    Route::post('/roles/storeRole', [RoleController::class, 'storeRole'])->name('roles.storeRole');
+    Route::put('/roles/updateRole/{id}', [RoleController::class, 'updateRole'])->name('roles.updateRole');
+    Route::delete('roles/roleDeleted/{id}', [RoleController::class, 'roleDeleted'])->name('roles.roleDeleted');
+
+
+
 
     //Menu
     Route::get('/menu', [MenuController::class, 'menu'])->name('menu.menu');

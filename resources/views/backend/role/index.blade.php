@@ -23,7 +23,8 @@
                 <button type="button" id="deleteModalBtn" class="btn btn-danger m-b-20" disabled>
                     <i class="fa-solid fa-trash"></i>
                     <span id="deleteBtnText">Delete</span>
-                    <div id="deleteLoadingSpinner" class="spinner-border spinner-border-sm" role="status" style="display:none;">
+                    <div id="deleteLoadingSpinner" class="spinner-border spinner-border-sm" role="status"
+                        style="display:none;">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </button>
@@ -56,24 +57,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="role_id">Role</label>
-                            <select class="form-control" id="role_id" name="role_id" required>
-                                <option value="" selected disabled>Pilih Role</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="menu_id">Menu</label>
-                            <select class="form-control" id="menu_id" name="menu_id" required>
-                                <option value="" selected disabled>Pilih Menu</option>
-                            </select>
+                            <label for="role_name">Role Name</label>
+                            <input type="text" class="form-control" id="role_name" name="role_name" required
+                                placeholder="Masukkan Nama Role">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="addSubmitBtn">
                             <span id="addBtnText">Tambah</span>
-                            <div id="addLoadingSpinner" class="spinner-border spinner-border-sm" role="status" style="display:none;">
+                            <div id="addLoadingSpinner" class="spinner-border spinner-border-sm" role="status"
+                                style="display:none;">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                         </button>
@@ -82,6 +76,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Modal Update -->
     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
@@ -93,17 +88,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="update_menu_id_hidden" name="menu_id">
+                        <input type="hidden" id="update_role_id_hidden" name="role_id">
                         <div class="form-group">
-                            <label for="update_role_id">Role</label>
-                            <select class="form-control" id="update_role_id" name="role_id" required>
-                                <option value="" selected disabled>Pilih Role</option>
-                            </select>
+                            <label for="update_role_name">Role Name</label>
+                            <input type="text" class="form-control" id="update_role_name" name="role_name" required>
                         </div>
                         <div class="form-group">
-                            <label for="update_menu_id">Menu</label>
-                            <select class="form-control" id="update_menu_id" name="menu_id" required>
-                                <option value="" selected disabled>Pilih Menu</option>
+                            <label for="update_role_status">Role Status</label>
+                            <select class="form-control" id="update_role_status" name="role_status" required>
+                                <option value="" selected disabled>Pilih Status</option>
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
                             </select>
                         </div>
                     </div>
@@ -111,7 +106,8 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="updateSubmitBtn">
                             <span id="updateBtnText">Update</span>
-                            <div id="updateLoadingSpinner" class="spinner-border spinner-border-sm" role="status" style="display:none;">
+                            <div id="updateLoadingSpinner" class="spinner-border spinner-border-sm" role="status"
+                                style="display:none;">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                         </button>
@@ -120,6 +116,7 @@
             </div>
         </div>
     </div>
+
 
     @push('scripts')
         <script>
@@ -134,13 +131,32 @@
                 var drow = $('#row-selected').DataTable({
                     processing: false,
                     serverSide: false,
-                    ajax: '{{ route('role.getDataRole') }}',
-                    columns: [
-                        { data: 'id', name: 'id' },
-                        { data: 'role_name', name: 'role_name' },
-                        { data: 'menu_name', name: 'menu_name' },
-                        { data: 'is_active', name: 'is_active' },
-                        { data: 'created_at', name: 'created_at' }
+                    ajax: '{{ route('roles.getAllRoles') }}',
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'role_name',
+                            name: 'role_name'
+                        },
+                        {
+                            data: 'role_status',
+                            name: 'role_status'
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'created_at',
+                            render: function(data, type, row) {
+                                // Check if `data` is not null or undefined
+                                if (data) {
+                                    var date = new Date(data);
+                                    return date.toLocaleDateString('id-ID') + ' ' + date
+                                        .toLocaleTimeString('id-ID');
+                                }
+                                return '';
+                            }
+                        }
                     ],
                 });
 
@@ -169,12 +185,19 @@
                 $('#updateModalBtn').on('click', function() {
                     var selectedData = drow.row('.selected').data();
                     if (selectedData) {
-                        $('#update_menu_id_hidden').val(selectedData.id);
-                        loadRoles(selectedData.role_id);
-                        loadMenus(selectedData.menu_id);
+                        // Menyisipkan data ke dalam field role_name (sebelumnya role_id)
+                        $('#update_role_name').val(selectedData.role_name);
+
+                        // Menyisipkan data ke dalam hidden input (menu_id)
+                        $('#update_role_id_hidden').val(selectedData.id);
+
+                        // Menyisipkan status role ON/OFF
+                        $('#update_role_status').val(selectedData.role_status);
+
                         $('#updateModal').modal('show');
                     }
                 });
+
 
                 // Load roles and menus dynamically for update
                 function loadRoles(selectedRoleId) {
@@ -186,7 +209,8 @@
                             roleSelect.empty();
                             roleSelect.append('<option value="" selected disabled>Pilih Role</option>');
                             $.each(response.data, function(index, role) {
-                                roleSelect.append('<option value="' + role.id + '">' + role.role_name + '</option>');
+                                roleSelect.append('<option value="' + role.id + '">' + role
+                                    .role_name + '</option>');
                             });
                             roleSelect.val(selectedRoleId);
                         },
@@ -196,72 +220,19 @@
                     });
                 }
 
-                function loadMenus(selectedMenuId) {
-                    $.ajax({
-                        url: '/menus/data',
-                        method: 'GET',
-                        success: function(response) {
-                            var menuSelect = $('#update_menu_id');
-                            menuSelect.empty();
-                            menuSelect.append('<option value="" selected disabled>Pilih Menu</option>');
-                            $.each(response.data, function(index, menu) {
-                                menuSelect.append('<option value="' + menu.id + '">' + menu.menu_name + '</option>');
-                            });
-                            menuSelect.val(selectedMenuId);
-                        },
-                        error: function() {
-                            console.log('Failed to load menus.');
-                        }
-                    });
-                }
-
-                function loadRolesAdd() {
-                    $.ajax({
-                        url: '/roles/getData',
-                        method: 'GET',
-                        success: function(response) {
-                            var roleSelect = $('#role_id, #update_role_id');
-                            roleSelect.empty();
-                            roleSelect.append('<option value="" selected disabled>Pilih Role</option>');
-                            $.each(response.data, function(index, role) {
-                                roleSelect.append('<option value="' + role.id + '">' + role.role_name + '</option>');
-                            });
-                        },
-                        error: function() {
-                            console.log('Failed to load roles.');
-                        }
-                    });
-                }
-
-                function loadMenusAdd() {
-                    $.ajax({
-                        url: '/menus/data',
-                        method: 'GET',
-                        success: function(response) {
-                            var menuSelect = $('#menu_id, #update_menu_id');
-                            menuSelect.empty();
-                            menuSelect.append('<option value="" selected disabled>Pilih Menu</option>');
-                            $.each(response.data, function(index, menu) {
-                                menuSelect.append('<option value="' + menu.id + '">' + menu.menu_name + '</option>');
-                            });
-                        },
-                        error: function() {
-                            console.log('Failed to load menus.');
-                        }
-                    });
-                }
-
                 // Handle Add Menu Form Submission
                 $('#addMenuForm').on('submit', function(e) {
                     e.preventDefault();
-                    handleFormSubmit('{{ route('menus.storeMenuManagement') }}', $(this), '#addModal', drow, 'POST');
+                    handleFormSubmit('{{ route('roles.storeRole') }}', $(this), '#addModal', drow,
+                        'POST');
                 });
 
                 // Handle Update Menu Form Submission
                 $('#updateMenuForm').on('submit', function(e) {
                     e.preventDefault();
-                    var menu_id = $('#update_menu_id_hidden').val();
-                    handleFormSubmit("{{ route('menus.updateMenuManagement', '') }}/" + menu_id, $(this), '#updateModal', drow, 'PUT');
+                    var role_id = $('#update_role_id_hidden').val();
+                    handleFormSubmit("{{ route('roles.updateRole', '') }}/" + role_id, $(this),
+                        '#updateModal', drow, 'PUT');
                 });
 
                 // Handle form submit for both add and update
@@ -307,9 +278,9 @@
 
                 // Handle form errors
                 function handleFormError(xhr) {
-                    var errorMessage = xhr.responseJSON && xhr.responseJSON.message 
-                        ? xhr.responseJSON.message 
-                        : 'Failed to submit form. Please try again.';
+                    var errorMessage = xhr.responseJSON && xhr.responseJSON.message ?
+                        xhr.responseJSON.message :
+                        'Failed to submit form. Please try again.';
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -343,20 +314,20 @@
                     }
                 });
 
-                function handleDelete(menuId, table) {
+                function handleDelete(role_id, table) {
                     $('#deleteBtnText').hide();
                     $('#deleteLoadingSpinner').show();
                     $('#deleteModalBtn').prop('disabled', true);
 
                     $.ajax({
                         type: "DELETE",
-                        url: "{{ route('menus.menuManagementDeleted', '') }}/" + menuId,
+                        url: "{{ route('roles.roleDeleted', '') }}/" + role_id,
                         success: function(response) {
                             table.ajax.reload();
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Deleted!',
-                                text: 'Menu has been deleted.',
+                                text: 'Role has been deleted.',
                                 timer: 1500,
                                 showConfirmButton: false
                             });
@@ -367,7 +338,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
-                                text: 'Failed to delete menu!',
+                                text: 'Failed to delete Role!',
                             });
                         }
                     });
