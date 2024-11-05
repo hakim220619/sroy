@@ -1,9 +1,9 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Menu Management')
+@section('title', 'Option')
 @section('page-header-icon', 'ph-duotone ph-house')
 @section('page-header-one', 'Menu')
-@section('page-header', 'Menu Management')
+@section('page-header', 'Option')
 
 @section('content')
 <div class="col-sm-12">
