@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Data_csr;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/proxy/provinces', function () {
         $response = Http::get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
         return response($response->body(), $response->status());
-    });    
+    });
     Route::get('/proxy/regencies/{provinceId}', function ($provinceId) {
         $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/{$provinceId}.json");
         return response($response->body(), $response->status());
@@ -72,6 +73,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/roles/storeRole', [RoleController::class, 'storeRole'])->name('roles.storeRole');
     Route::put('/roles/updateRole/{id}', [RoleController::class, 'updateRole'])->name('roles.updateRole');
     Route::delete('roles/roleDeleted/{id}', [RoleController::class, 'roleDeleted'])->name('roles.roleDeleted');
+
+    //Options
+    Route::get('/options', [OptionsController::class, 'index'])->name('options');
+    Route::get('/options/getData', [OptionsController::class, 'getAllOptions'])->name('options.getAllOptions');
+    Route::post('/options/storeHeader', [OptionsController::class, 'storeHeader'])->name('options.storeHeader');
+    Route::post('/options/storeOptions', [OptionsController::class, 'storeOptions'])->name('options.storeOptions');
+    Route::put('/options/updateHdr/{id}', [OptionsController::class, 'updateHdr'])->name('options.updateHdr');
+    Route::put('/options/updateOpt/{id}', [OptionsController::class, 'updateOpt'])->name('options.updateOpt');
+    Route::delete('options/optionsDeletedHeader/{id}', [OptionsController::class, 'optionsDeletedHeader'])->name('options.optionsDeletedHeader');
+    Route::delete('/option/delete/{id}', [OptionsController::class, 'optionsDeletedOption'])->name('options.optionsDeletedOption');
+
+
 
 
 
