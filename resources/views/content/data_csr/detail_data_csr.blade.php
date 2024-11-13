@@ -14,8 +14,8 @@
             <div class="card">
                   <div class="card-header d-flex justify-content-between align-items-center">
                     <h5>Detail Data Program CSR</h5>
-                    <a href="#" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalLive">Edit Program</a>
-                    <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+                    <a href="#" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalLive{{$detail_data_csr->id}}">Edit Program</a>
+                    <div id="exampleModalLive{{$detail_data_csr->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -27,6 +27,8 @@
                               <div class="my-3">
                                   <h4>Informasi Program</h4>
                               </div>                        
+                            <form action="{{ route('update-data-csr',$detail_data_csr->id) }}" method="POST">
+                              @csrf
                               <div class="col-lg-12">
                                   <div class="form-group">
                                       <label class="form-label">Nama Program:</label>
@@ -124,7 +126,7 @@
                                   <div class="col-lg-12">
                                       <div class="form-group">
                                           <label class="form-label">Alamat Pelaksanaan Program:</label>
-                                          <input type="text" class="form-control" name="alamat_pelaksanaan" id="alamat_pelaksanaan" placeholder="Alamat Program" required>
+                                          <input type="text" class="form-control" name="alamat_pelaksanaan" id="alamat_pelaksanaan" value="{{ $detail_data_csr->alamat_pelaksanaan }}" placeholder="Alamat Program" required>
                                       </div>
                                   </div>
                                   <div class="col-lg-12">
@@ -133,7 +135,7 @@
                                           <select name="provinsi" id="provinsi" class="form-control" required>
                                               <option value="">Pilih provinsi</option>
                                               @foreach ($provinces as $p)
-                                              <option value="{{ $p['name'] }}" data-id="{{ $p['id'] }}">{{ $p['name'] }}</option>
+                                              <option {{ ($p['name'] == $detail_data_csr->provinsi) ? 'selected' : '' }} value="{{ $p['name'] }}" data-id="{{ $p['id'] }}">{{ $p['name'] }}</option>
                                                   
                                               @endforeach
                                           </select>
@@ -159,9 +161,10 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                           </div>
                         </div>
+                      </form>
                       </div>
                     </div>
                   </div>
@@ -246,6 +249,7 @@
                             <h5>STAKEHOLDER</h5>
                         </div>
                         <div class="col-lg-12">
+                          <button type="button" class="btn btn-info btn-sm my-3" data-bs-toggle="modal" data-bs-target="#exampleModalLive1">Tambah</button>
                             <div class="table-responsive">
                                 <table class="table" id="pc-dt-simple">
                                   <thead>
@@ -258,6 +262,7 @@
                                       <th>Dana</th>
                                       <th>Durasi</th>
                                       <th>Barang</th>
+                                      <th>Aksi</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -271,6 +276,135 @@
                                         <td>{{ $dds->dana }}</td>
                                         <td>{{ $dds->durasi }}</td>
                                         <td>{{ $dds->barang }}</td>
+                                        <td>
+                                          {{-- Tambah data setake holder --}}
+                                          <div id="exampleModalLive1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLiveLabel">Tambah Stakeholder</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <div>                                                  
+                                                    <form action="{{route('add-stakeholder', $detail_data_csr->id)}}" method="POST">
+                                                      @csrf
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="nama_stakeholder">Nama Stakeholder</label>
+                                                        <input type="text" class="form-control" id="nama_stakeholder" name="nama_stakeholder" required>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="peran">Peran</label>
+                                                        <input type="text" class="form-control" id="peran" name="peran" required>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="output">Output</label>
+                                                        <textarea class="form-control" id="output" name="output" rows="3" required></textarea>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="outcome">Outcome</label>
+                                                        <textarea class="form-control" id="outcome" name="outcome" rows="3" required></textarea>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="dana">Dana</label>
+                                                        <input type="number" class="form-control" id="dana" name="dana" required>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="durasi">Durasi</label>
+                                                        <input type="number" class="form-control" id="durasi" name="durasi" required>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <select name="satuan" id="satuan" class="form-select" required>
+                                                            <option value="">Pilih</option>
+                                                            <option value="Tahun">Tahun</option>
+                                                            <option value="Bulan">Bulan</option>
+                                                            <option value="Minggu">Minggu</option>
+                                                            <option value="Hari">Hari</option>
+                                                        </select>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="barang">Barang</label>
+                                                        <input type="text" class="form-control" id="barang" name="barang" required>
+                                                      </div>                                                     
+                                                    </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                  </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <a type="button" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalLive2{{$dds->id}}" class="btn btn-primary btn-sm">Edit</a>
+                                          <div id="exampleModalLive2{{$dds->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLiveLabel">Edit Stakeholder</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <div>                                                  
+                                                    <form action="{{route('edit-stakeholder', $dds->id)}}" method="POST">
+                                                      @csrf
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="nama_stakeholder">Nama Stakeholder</label>
+                                                        <input type="text" class="form-control" id="nama_stakeholder" name="nama_stakeholder" value="{{$dds->nama_stakeholder}}" required>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="peran">Peran</label>
+                                                        <input type="text" class="form-control" id="peran" name="peran" value="{{$dds->peran}}" required>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="output">Output</label>
+                                                        <textarea class="form-control" id="output" name="output" rows="3" required>{{$dds->output}}</textarea>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="outcome">Outcome</label>
+                                                        <textarea class="form-control" id="outcome" name="outcome" rows="3" required>{{$dds->outcome}}</textarea>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="dana">Dana</label>
+                                                        <input type="number" class="form-control" id="dana" name="dana" value="{{$dds->dana}}" required>
+                                                      </div>                   
+                                                      <?php
+                                                          if (preg_match('/(\d+)\s*(\w+)/', $dds->durasi, $matches)) {
+                                                                $angka = (int) $matches[1]; // Mengambil angka, dalam hal ini 3
+                                                                $satuan = $matches[2]; // Mengambil satuan, dalam hal ini 'Tahun'
+                                                            }
+                                                      ?>                                  
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="durasi">Durasi</label>
+                                                        <input type="number" class="form-control" id="durasi" name="durasi" value="{{$angka}}" required>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <select name="satuan" id="satuan" class="form-select" required>
+                                                            <option value="">Pilih</option>
+                                                            <option {{ ($satuan== 'Tahun') ? 'selected' : '' }} value="Tahun">Tahun</option>
+                                                            <option {{ ($satuan== 'Bulan') ? 'selected' : '' }} value="Bulan">Bulan</option>
+                                                            <option {{ ($satuan== 'Minggu') ? 'selected' : '' }} value="Minggu">Minggu</option>
+                                                            <option {{ ($satuan== 'Hari') ? 'selected' : '' }} value="Hari">Hari</option>
+                                                        </select>
+                                                      </div>                                                     
+                                                      <div class="form-group">
+                                                        <label class="form-label" for="barang">Barang</label>
+                                                        <input type="text" class="form-control" id="barang" name="barang" value="{{$dds->barang}}" required>
+                                                      </div>                                                     
+                                                    </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                  </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <a type="button" data-id="{{ $dds->id }}" class="btn btn-danger btn-delete btn-sm text-white">Hapus</a>
+                                        </td>
                                     </tr>                                        
                                     @endforeach
                                   </tbody>
@@ -287,6 +421,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('assets/js/plugins/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       $(document).ready(function() {
           // Ketika provinsi dipilih
@@ -306,8 +441,10 @@
                       success: function(data) {
                           // Tambahkan kabupaten/kota ke dropdown
                           $.each(data, function(key, value) {
-                              $('#kabupaten').append('<option value="'+ value.name +'" data-id="'+value.id+'">'+ value.name +'</option>');
+                              var selected = (value.name === '<?= $detail_data_csr->kabupaten ?>') ? 'selected' : '';
+                              $('#kabupaten').append('<option value="'+ value.name +'" data-id="'+value.id+'" ' + selected + '>'+ value.name +'</option>');
                           });
+                          $('#kabupaten').trigger('change');
                       },
                       error: function(err) {
                           console.log("Error fetching regencies:", err);
@@ -336,7 +473,8 @@
                       success: function(data) {
                           // Tambahkan kecamatan ke dropdown
                           $.each(data, function(key, value) {
-                              $('#kecamatan').append('<option value="'+ value.name +'" data-id="'+value.id+'">'+ value.name +'</option>');
+                              var selected = (value.name === '<?= $detail_data_csr->kecamatan ?>') ? 'selected' : '';
+                              $('#kecamatan').append('<option value="'+ value.name +'" data-id="'+value.id+'" ' + selected + '>'+ value.name +'</option>');
                           });
                       },
                       error: function(err) {
@@ -348,6 +486,7 @@
                   $('#kecamatan').empty().append('<option value="">Pilih Kecamatan</option>');
               }
           });
+          $('#provinsi').trigger('change');
       });
   </script>
 <script>
@@ -482,5 +621,71 @@
             }
           }
         });
+</script>
+<script>
+  @if (session('success'))
+      Swal.fire({
+          title: 'Success!',
+          text: "{{ session('success') }}",
+          icon: 'success',
+          confirmButtonText: 'OK'
+      });
+  @endif
+</script>
+<script>
+    document.querySelectorAll('.btn-delete').forEach(
+      button => {
+        button.addEventListener('click',function(){
+          const stakeholderId = this.getAttribute('data-id');
+          Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: `Anda tidak dapat mengembalikan data !`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Mengirimkan permintaan penghapusan menggunakan AJAX
+                    fetch(`/delete-stakeholder/${stakeholderId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === 'Data berhasil dihapus') {
+                            Swal.fire(
+                                'Terhapus!',
+                                `Data  telah dihapus.`,
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Gagal!',
+                                `Data gagal dihapus.`,
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error!',
+                            'Terjadi kesalahan, coba lagi nanti.',
+                            'error'
+                        );
+                    });
+                }
+              });
+ 
+        })
+      }
+    )
 </script>
 @endsection

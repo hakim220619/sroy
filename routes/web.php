@@ -35,6 +35,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/csr/store', [Add_csr::class, 'store'])->name('csr.store');
     Route::get('/data-csr', [Data_csr::class, 'index'])->name('data-csr');
     Route::get('/detail-data-csr/{id}', [Data_csr::class, 'detail'])->name('detail-data-csr');
+    Route::post('/update-data-csr/{id}', [Data_csr::class, 'update_program'])->name('update-data-csr');
+
+    Route::delete('/delete-stakeholder/{id}', [Data_csr::class, 'delete_stakeholder']);
+    Route::post('/add-stakeholder/{id}', [Data_csr::class, 'add_stakeholder'])->name('add-stakeholder');
+    Route::post('/edit-stakeholder/{id}', [Data_csr::class, 'edit_stakeholder'])->name('edit-stakeholder');
 
     Route::get('/analisis-sroi', [Analisis_sroi::class, 'index'])->name('analisis-sroi');
     Route::get('/analisis-sroi/{id}', [Analisis_sroi::class, 'detail_analisis'])->name('detail-analisis');

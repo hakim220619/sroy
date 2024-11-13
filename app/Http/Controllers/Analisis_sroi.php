@@ -10,7 +10,7 @@ class Analisis_sroi extends Controller
     public function index()  {
         $data['title'] = "Analisis SROI Program CSR";
         $data_csr = DB::table('program_csr')
-            ->select('program_csr.id as id_program_csr','program_csr.nama_program', 'program_csr.entitas', 'program_csr.priode_program_dari','program_csr.tahun','program_csr.anggaran')
+            ->select('program_csr.id as id_program_csr','program_csr.nama_program', 'program_csr.entitas', 'program_csr.priode_program_dari','program_csr.anggaran')
             ->get();
         return view('content.analisis_sroi.index',compact('data_csr'), $data);
     }
@@ -21,7 +21,7 @@ class Analisis_sroi extends Controller
             ->join('stakeholder', 'stakeholder.id', '=', 'program_csr_stakeholder.id_stakeholder')
             ->where('program_csr.id', '=', $id)
             ->select('program_csr.id as id_program_csr','program_csr.nama_program', 'program_csr.entitas', 'program_csr.priode_program_dari','stakeholder.dana',
-                    'program_csr.tahun','program_csr.anggaran','stakeholder.outcome', 'stakeholder.nama_stakeholder')
+                    'program_csr.anggaran','stakeholder.outcome', 'stakeholder.nama_stakeholder')
             ->first();
 
         $data_stakeholder = DB::table('program_csr')

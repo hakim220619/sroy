@@ -23,7 +23,6 @@
                             <th>No</th>
                             <th>Nama Program</th>
                             <th>Entitas</th>
-                            <th>Tahun</th>
                             <th>Anggaran(Rp)</th>
                             <th>Aksi</th>
                           </tr>
@@ -34,7 +33,6 @@
                             <td>{{ $index+1 }}</td>
                             <td>{{ $dc->nama_program }}</td>
                             <td>{{ $dc->entitas }}</td>
-                            <td>{{ $dc->tahun }}</td>
                             <td>{{ $dc->anggaran }}</td>
                             <td>
                               <a href="{{ route('detail-analisis', $dc->id_program_csr) }}" class="btn btn-info btn-sm">Analisis</a>

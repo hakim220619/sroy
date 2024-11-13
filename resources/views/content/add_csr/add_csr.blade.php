@@ -310,7 +310,7 @@
                                                     <div class="row">
                                                       <div class="form-group col-md-3">
                                                         <label class="form-label" for="inputCity">Dana</label>
-                                                        <input type="text" class="form-control" id="stakeholder-dana"  >
+                                                        <input type="number" class="form-control" id="stakeholder-dana"  >
                                                       </div>
                                                       <div class="form-group col-md-2">
                                                         <label class="form-label" for="inputZip">Durasi</label>

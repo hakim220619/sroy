@@ -40,7 +40,6 @@
                             <td>{{ date('d-M-Y', strtotime($dc->priode_program_dari)) .' s/d '. date('d-M-Y', strtotime($dc->priode_program_sampai)) }}</td>
                             <td>
                                 <a type="button" href="{{ route('detail-data-csr',$dc->id) }}" class="btn btn-info btn-sm">Lihat Data</a>
-                                <a type="button" href="{{ route('detail-data-csr',$dc->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <a type="button" href="{{ route('detail-data-csr',$dc->id) }}" class="btn btn-danger btn-sm">Hapus</a>
                             </td>
                           </tr>
