@@ -42,10 +42,10 @@
                         </div>
                         <div class="d-flex mt-1 justify-content-between align-items-center">
                             <div class="form-check">
-                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
-                                    checked="">
+                                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
                             </div>
+                            
                         </div>
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-primary">Login</button>
@@ -57,29 +57,21 @@
                     <div class="row g-2">
                         <div class="col-4">
                             <div class="d-grid">
-                                {{-- <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                    <img src="../assets/images/authentication/twitter.svg" alt="img"> <span
-                                        class="d-none d-sm-inline-block">
-                                        Twitter</span>
-                                </button> --}}
+      
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="d-grid">
-                                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                                <a href="{{ route('login.redirectToGoogle') }}" class="btn mt-2 btn-light-primary bg-light text-muted">
                                     <img src="../assets/images/authentication/google.svg" alt="img"> <span
                                         class="d-none d-sm-inline-block"> Google</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <div class="col-4">
                             <div class="d-grid">
-                                {{-- <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                    <img src="../assets/images/authentication/facebook.svg" alt="img"> <span
-                                        class="d-none d-sm-inline-block">
-                                        Facebook</span>
-                                </button> --}}
+                              
                             </div>
                         </div>
                     </div>
