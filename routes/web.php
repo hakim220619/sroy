@@ -45,9 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/delete-stakeholder/{id}', [Data_csr::class, 'delete_stakeholder']);
     Route::post('/add-stakeholder/{id}', [Data_csr::class, 'add_stakeholder'])->name('add-stakeholder');
     Route::post('/edit-stakeholder/{id}', [Data_csr::class, 'edit_stakeholder'])->name('edit-stakeholder');
-
+    
     Route::get('/analisis-sroi', [Analisis_sroi::class, 'index'])->name('analisis-sroi');
     Route::get('/analisis-sroi/{id}', [Analisis_sroi::class, 'detail_analisis'])->name('detail-analisis');
+    Route::post('/add-overclaim/{id}', [Analisis_sroi::class, 'add_overclaim'])->name('add-overclaim');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
